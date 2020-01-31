@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29324.140
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PollCreator", "PollCreator\PollCreator.csproj", "{79AC84A4-2A84-4BC8-9E96-90BDB71F6F2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PollCreator_Tests", "PollCreator_Tests\PollCreator_Tests.csproj", "{3F694EAB-D997-41BF-9085-0218C7630175}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79AC84A4-2A84-4BC8-9E96-90BDB71F6F2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79AC84A4-2A84-4BC8-9E96-90BDB71F6F2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79AC84A4-2A84-4BC8-9E96-90BDB71F6F2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79AC84A4-2A84-4BC8-9E96-90BDB71F6F2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F694EAB-D997-41BF-9085-0218C7630175}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F694EAB-D997-41BF-9085-0218C7630175}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F694EAB-D997-41BF-9085-0218C7630175}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F694EAB-D997-41BF-9085-0218C7630175}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F014ABF6-7576-41C9-A6EA-E13983361664}
+	EndGlobalSection
+EndGlobal
