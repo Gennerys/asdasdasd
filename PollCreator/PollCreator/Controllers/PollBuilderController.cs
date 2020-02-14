@@ -1,5 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Data;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using PollCreator.Interfaces.Services;
+using PollCreator.Models;
+using PollCreator.ViewModels;
 
 namespace PollCreator.Controllers
 {
@@ -7,10 +12,12 @@ namespace PollCreator.Controllers
 	public class PollBuilderController : Controller
     {
 	    private readonly ITokenService _tokenService;
+	    private readonly IConfiguration _configuration;
 
-	    public PollBuilderController(ITokenService tokenService)
+	    public PollBuilderController(ITokenService tokenService, IConfiguration configuration)
 	    {
 		    _tokenService = tokenService;
+		    _configuration = configuration;
 	    }
 
 	    [Route("create")]
@@ -20,16 +27,60 @@ namespace PollCreator.Controllers
 		    return RedirectToAction("Edit",new
 		    {
 			    pollId = _tokenService.GetRandomToken(6),
-			    tokenId = _tokenService.GetRandomToken(32)
+			    editorId = _tokenService.GetRandomToken(32)
 		    });
 
 	    }
 
-		[Route("{pollId}/edit/{tokenId}")]
+		[Route("{pollId}/edit/{editorId}")]
 		[HttpGet]
-	    public IActionResult Edit(string pollId, string tokenId)
+	    public IActionResult Edit(string pollId, string editorId)
 	    {
-		    return View();
+		    PollBuilderViewModel pollBuilderViewModel = new PollBuilderViewModel()
+		    {
+			    PollId = pollId,
+			    EditorToken = editorId
+		    };
+
+		    return View("Edit",pollBuilderViewModel);
 	    }
+
+	    [HttpPost]
+		[Route("publish")]
+		public IActionResult Publish([FromBody]PollPublishRequest pollPublishRequest)
+		{
+			if (!ModelState.IsValid)
+			{
+				return BadRequest();
+			}
+
+			string connectionString = _configuration["ConnectionStrings:DefaultConnection"];
+			using (SqlConnection connection = new SqlConnection(connectionString))
+			{
+				string sql = $"Insert Into Poll (Title, IsSingleOption, IsPublished, PollId, EditorToken) " +
+				             $"Values ('{pollPublishRequest.Title}','{pollPublishRequest.IsSingleOption}','{pollPublishRequest.IsPublished}','{pollPublishRequest.PollId}','{pollPublishRequest.EditorToken}')";
+				using (SqlCommand command = new SqlCommand(sql,connection))
+				{
+					command.CommandType = CommandType.Text;
+					connection.Open();
+					command.ExecuteNonQuery();
+					connection.Close();
+				}
+
+				foreach (var option in pollPublishRequest.Options)
+				{
+					sql = $"Insert Into PollOption (SerialNumber, Value, Poll_PK) Values ('{option.SerialNumber}', '{option.Value}', '{pollPublishRequest.PollId}')";
+					using (SqlCommand command = new SqlCommand(sql, connection))
+					{
+						command.CommandType = CommandType.Text;
+						connection.Open();
+						command.ExecuteNonQuery();
+						connection.Close();
+					}
+				}
+			}
+
+			return Ok();
+		}
     }
 }

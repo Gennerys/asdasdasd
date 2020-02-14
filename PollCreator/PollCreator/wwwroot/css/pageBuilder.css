@@ -1,0 +1,9 @@
+﻿.pollOptions {
+	display: block;
+	margin-bottom: 10px;
+}
+fieldset{
+	background-color:#CCC;
+	max-width:500px;
+	padding:16px;	
+}

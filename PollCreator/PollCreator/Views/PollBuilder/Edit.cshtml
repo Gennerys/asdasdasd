@@ -1,3 +1,45 @@
-﻿<div class="text-center">
-	<h1 class="display-4">Welcome To The Polls Builder!</h1>
+﻿@model PollCreator.ViewModels.PollBuilderViewModel
+<head>
+	<link rel="stylesheet"  href="/css/pageBuilder.css">
+	<script src="/js/pageBuilder.js"></script>
+</head>
+<div>
+	<h1>Welcome To The Polls Builder!</h1>
+</div>
+<form id="pollBuilderForm" asp-action="Edit" asp-controller="PollBuilder" method="post">
+	<fieldset id ="pollBuilderFromFields">
+		<div>
+			<label for="title">Title:</label>
+			<input id="title" name="title" type="text" placeholder="Poll title here..."><br>
+		</div>
+		<p>Choose your poll type:</p>
+		<div>
+			<input id="isMultiOption" name="pollType" type="radio" value="false"
+			       checked>
+			<label for="isMultiOption">Multi-Choice</label>
+		</div>
+		<div>
+			<input id="isSingleOption" name="pollType" type="radio" value="true">
+			<label for="isSingleOption">Single-Choice</label>
+		</div>
+		<div>
+			<p>Poll options: </p>
+			<div id="options">
+
+			</div>
+			<button id="addPollOption" type="button">Add</button>
+		</div>
+
+		<div>
+			<input asp-for="PollId" value="@Model.PollId">
+			<input asp-for="EditorToken" value="@Model.EditorToken">
+			<input asp-for="IsPublished" value="true"/>
+			<br>
+			<button id="publishPoll" type="button">Publish</button>
+		</div>
+	</fieldset>
+</form>
+<span id="inputError"></span>
+<div id="container">
+
 </div>
