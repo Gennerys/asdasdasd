@@ -59,8 +59,8 @@
     <Folder Include="Tables" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Tables\Poll.sql" />
-    <Build Include="Tables\PollOption.sql" />
+    <Build Include="Tables\ct_poll.sql" />
+    <Build Include="Tables\ct_poll_option.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PollCreatorDb.publish.xml" />

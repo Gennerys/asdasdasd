@@ -1,1 +1,30 @@
-﻿<h1>TODO</h1>
+﻿@model PollCreator.ViewModels.PollRenderViewModel
+<h1>Vote Page</h1>
+<div>
+	@Html.DisplayName(Model.Title)
+</div>
+@{
+	using (Html.BeginForm("Vote", "PollRenderer", FormMethod.Post))
+	{
+		if (Model.IsSingleOption)
+		{
+			foreach (var option in Model.Options)
+			{
+				<span>@Html.DisplayFor(i => option.SerialNumber) @option.Value</span> @Html.RadioButton("radioButtonOpt", option.Value)
+				<br />
+			}
+		}
+		else
+		{
+			foreach (var option in Model.Options)
+			{
+				<span>@Html.DisplayFor(i => option.SerialNumber) @option.Value</span>@Html.CheckBox($"{option.Value}")
+				<br />
+			}
+			
+		}
+		<input type="submit" value="submit" />
+
+	}
+
+}

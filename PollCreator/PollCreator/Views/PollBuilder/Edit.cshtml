@@ -6,28 +6,37 @@
 <div>
 	<h1>Welcome To The Polls Builder!</h1>
 </div>
+
 <form id="pollBuilderForm" asp-action="Edit" asp-controller="PollBuilder" method="post">
 	<fieldset id ="pollBuilderFromFields">
 		<div>
-			<label for="title">Title:</label>
-			<input id="title" name="title" type="text" placeholder="Poll title here..."><br>
+			<label class="pageBuilderLabel" for="title" >Title:</label>
+			<input class="pageBuilderTitle" id="title" name="title" type="text" placeholder="Poll title here..." value ="@Model.Title"><br>
 		</div>
 		<p>Choose your poll type:</p>
 		<div>
-			<input id="isMultiOption" name="pollType" type="radio" value="false"
-			       checked>
-			<label for="isMultiOption">Multi-Choice</label>
+			<input class="pollBuilderRadioBtn" id="isMultiOption" name="pollType" type="radio" value="@Model.IsSingleOption" @( Convert.ToBoolean(!Model.IsSingleOption) ? @Html.Raw("checked") : null )>
+			<label class="pageBuilderLabel" for="isMultiOption">Multi-Choice</label>
 		</div>
 		<div>
-			<input id="isSingleOption" name="pollType" type="radio" value="true">
-			<label for="isSingleOption">Single-Choice</label>
+			<input class="pollBuilderRadioBtn" id="isSingleOption" name="pollType" type="radio" value="true" @( Convert.ToBoolean(Model.IsSingleOption) ? @Html.Raw("checked") : null )>
+			<label class="pageBuilderLabel" for="isSingleOption">Single-Choice</label>
 		</div>
 		<div>
 			<p>Poll options: </p>
 			<div id="options">
-
+				@*@{
+					if (Model.Options != null)
+					{
+						foreach (var option in Model.Options)
+						{
+							<input id="@option.SerialNumber" name="pollType" type="text" value="@option.Value">
+							<script> </script>
+						}
+					}
+				}*@
 			</div>
-			<button id="addPollOption" type="button">Add</button>
+			<button  class="pollBuilderAddOptionBtn" id="addPollOption" type="button">Add</button>
 		</div>
 
 		<div>
@@ -35,7 +44,7 @@
 			<input asp-for="EditorToken" value="@Model.EditorToken">
 			<input asp-for="IsPublished" value="true"/>
 			<br>
-			<button id="publishPoll" type="button">Publish</button>
+			<button class="pollBuilderPublishBtn" id="publishPoll" type="button">Publish</button>
 		</div>
 	</fieldset>
 </form>
@@ -43,3 +52,14 @@
 <div id="container">
 
 </div>
+
+<script>
+
+	function a() {
+		var str = "@Model.Title";
+		console.log(str);
+	}
+
+
+
+</script>

@@ -7,3 +7,81 @@ fieldset{
 	max-width:500px;
 	padding:16px;	
 }
+.pageBuilderLabel{
+	font-family: "Comic Sans MS";
+	font-size: 18px;
+	color: #333;
+}
+.pageBuilderTitle{
+	max-width:500px;
+	background: #A8BACE;
+	border: none;
+	border-radius: 4px;
+	font-size: 15px;
+	font-family: "Comic Sans MS";
+	margin: 0;
+	outline: 0;
+	padding: 10px;
+	width: 100%;
+	box-sizing: border-box; 
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box; 
+	background-color: #A8BACE;
+	color:#333;
+	-webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+	box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+}
+
+.pollBuilderRadioBtn {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	display: inline-block;
+	position: relative;
+	background-color: #A8BACE;
+	color: #333;
+	top: 10px;
+	height: 30px;
+	width: 30px;
+	border: 0;
+	border-radius: 50px;
+	cursor: pointer;
+	margin-right: 7px;
+	outline: none;
+}
+.pollBuilderRadioBtn:checked::before {
+	position: absolute;
+	font: "Comic Sans MS";
+	left: 11px;
+	top: 7px;
+	content: '\02143';
+	transform: rotate(40deg);
+}
+.pollBuilderRadioBtn:hover {
+	background-color: #A8BACE;
+}
+.pollBuilderRadioBtn:checked {
+	background-color: #A8BACE;
+}
+
+.pollBuilderPublishBtn{
+	background: #333;
+	border: none;
+	padding: 8px 10px 8px 10px;
+    
+	font-family: "Comic Sans MS";
+	font-size: 24px;
+	border-radius: 5px;
+	color: #A8BACE;
+}
+
+.pollBuilderAddOptionBtn{
+	background: #A8BACE;
+	border: none;
+	padding: 8px 10px 8px 10px;
+	font-size: 18px;
+	font-family: "Comic Sans MS";
+	border-radius: 5px;
+	color: #333 ;
+}
+

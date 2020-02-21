@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -7,11 +8,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using PollCreator.DataAccess;
 using PollCreator.Implementation.Services;
 using PollCreator.Interfaces.Services;
 
 namespace PollCreator
 {
+	[ExcludeFromCodeCoverage]
 	public class Startup
 	{
 		public Startup(IConfiguration configuration)
@@ -26,7 +29,14 @@ namespace PollCreator
 		{
 			services.AddControllersWithViews()
 				.AddNewtonsoftJson();
+			var connectionStringSection =
+				Configuration.GetSection("ConnectionStrings");
+			services.Configure<ConnectionStringConfig>(connectionStringSection);
 			services.AddTransient<ITokenService, TokenService>();
+			services.AddTransient<IDataConnection, DataConnection>();
+			services.AddTransient<IPollRepository, PollRepository>();
+			services.AddTransient<IPollOptionRepository, PollOptionRepository>();
+
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

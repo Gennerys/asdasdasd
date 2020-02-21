@@ -9,6 +9,11 @@
 	addOptionButton.addEventListener("click", createInput);
 	publishPollButton.addEventListener("click", handlePublish);
 
+	function populateForm(dataFromDb) {
+		document.getElementById("title").value = 0;
+
+		
+	}
 	var optionNumber = 1;
 	createInput();
 	createInput();
@@ -37,7 +42,6 @@
 		var formDataContainer = {
 			options: []
 		};
-
 		for (const [key, value] of formData.entries()) {
 			if (key.startsWith("Option")) {
 				formDataContainer["options"].push({ SerialNumber: extractProperId(key), Value: value });
@@ -60,17 +64,25 @@
 			Options: jsonObjectToFormat["options"],
 			PollId: jsonObjectToFormat["PollId"],
 			EditorToken: jsonObjectToFormat["EditorToken"],
+			IsPublished: jsonObjectToFormat["IsPublished"],
 			__RequestVerificationToken: jsonObjectToFormat["__RequestVerificationToken"]
 		};
 
 		return formattedFormData;
 	}
 
+	function createParagraph(text) {
+		var paragraph = document.createElement('p');
+		paragraph.innerText = text;
+		linkContainer.appendChild(paragraph);
+	}
+
 	function createVotingPageLink(pollId) {
 
+		createParagraph("Your poll was published:");
 		var votingPageLink = document.createElement('a');
 		votingPageLink.setAttribute("href", `/p/${pollId}`);
-		var linkText = document.createTextNode("Poll Voting Page");
+		var linkText = document.createTextNode(`localhost:5000/p/${pollId}`);
 		votingPageLink.appendChild(linkText);
 		linkContainer.appendChild(votingPageLink);
 		createHiddenLinkInput(votingPageLink.href);
@@ -80,6 +92,7 @@
 
 		var copyToClipboardBtn = document.createElement("button");
 		copyToClipboardBtn.setAttribute("type", "button");
+		copyToClipboardBtn.style.margin = "0 0 0 10px";
 		var buttonText = document.createTextNode("Copy Link");
 		copyToClipboardBtn.appendChild(buttonText);
 		linkContainer.appendChild(copyToClipboardBtn);

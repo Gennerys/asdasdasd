@@ -12,9 +12,9 @@ namespace PollCreator.Models
 		[OptionList(2,10)]
 		public List<PollOptionDTO> Options { get; set; }
 		[Required]
-		public bool IsSingleOption { get; set; }
+		public  bool? IsSingleOption { get; set; }
 		[Required]
-		public bool IsPublished { get; set; } = false;
+		public bool IsPublished { get; set; }
 		[Required]
 		public string PollId { get; set; }
 		[Required]
